@@ -6,15 +6,15 @@ class Client:
         self.__username = username
         self.__password = password
         self.__database = database
-        if(self.login(self.__database)):
+        if(self.login()):
             self.__id = self.__database.get_id(self.__username, hash_password(self.__password))
         else:
             self.__id = None
 
 
-    def login(self, database: Database) -> bool:
+    def login(self) -> bool:
         """Login to database"""
-        return database.get_id(self.__username, hash_password(self.__password)) != None
+        return self.__database.get_id(self.__username, hash_password(self.__password)) != None
 
     
     def __str__(self) -> str:
