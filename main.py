@@ -22,18 +22,17 @@ password: str = None
 
 init()
 name = input(f"{Fore.GREEN}Username: {Style.RESET_ALL}")
-password = hash_password(cutie.secure_input(f"{Fore.GREEN}Password: {Style.RESET_ALL}"))
+password = cutie.secure_input(f"{Fore.GREEN}Password: {Style.RESET_ALL}")
 
 if(database.name_exists(name)):
-    if(database.get_id(name, password) != None):
+    if(database.get_id(name, hash_password(password)) != None):
         client = Client(name, password, database)
-        print(f"{Fore.GREEN}Logged in as {client}{Style.RESET_ALL}")
     else:
         print(f"{Fore.RED}Incorrect password{Style.RESET_ALL}")
         exit()
 else:
     if(cutie.prompt_yes_or_no("Create new account?")):
-        database.add_user(name, password)
+        database.add_user(name, hash_password(password))
         client = Client(name, password, database)
     else:
         input("Incorrect username or password. Press enter to exit...")
@@ -63,7 +62,7 @@ while True:
             continue
         password = encrypt_password(password, client.get_master_key())
         database.add_password(client.get_id(), name, password)
-        print(f"{Fore.GREEN}Mot de passe ajouté{Style.RESET_ALL}")
+        input(f"{Fore.GREEN}Mot de passe ajouté{Style.RESET_ALL}")
     elif(choice == 2):
         passwords = database.get_passwords(client.get_id())
         if(len(passwords) == 0):
