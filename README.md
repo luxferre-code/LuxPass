@@ -20,6 +20,14 @@ python3 main.py
 
 Il est possible de modifier certains variables comme le nom de la base de donnée ou même si le mode __log__ est activé. Pour ce faire, modifier les lignes 9 -- 10 du fichier **main.py**
 
+## Utilisation à l'IUT
+
+Pour une utilisation sécurisé à l'IUT, après le premier démarrage du programme. Faite la commande suivant dans le repertoire du programme
+```bash
+chmod 700 * -R
+```
+Cette commande permet que aucune personne ne puissent accéder aux fichiers de votre LuxPass.
+
 
 ## Authors
 
