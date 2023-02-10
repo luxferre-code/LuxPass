@@ -45,7 +45,8 @@ while True:
     {Fore.GREEN}2. {Style.RESET_ALL}Afficher les mots de passe
     {Fore.GREEN}3. {Style.RESET_ALL}Supprimer un mot de passe
     {Fore.GREEN}4. {Style.RESET_ALL}Changer de mot de passe
-    {Fore.GREEN}5. {Style.RESET_ALL}Quitter""")
+    {Fore.GREEN}5. {Style.RESET_ALL}Générer un mot de passe
+    {Fore.GREEN}6. {Style.RESET_ALL}Quitter""")
     try:
         choice = input(f"{Fore.GREEN}Choix: {Style.RESET_ALL}")
         choice = int(choice)
@@ -100,6 +101,19 @@ while True:
             print(f"{Fore.RED}Ancien mot de passe incorrect{Style.RESET_ALL}")
 
     elif(choice == 5):
+        length = input(f"{Fore.GREEN}Longueur du mot de passe: {Style.RESET_ALL}")
+        try:
+            length = int(length)
+        except ValueError:
+            print(f"{Fore.RED}Longueur invalide{Style.RESET_ALL}")
+            continue
+        print(f"{Fore.GREEN}Mot de passe généré: {Style.RESET_ALL}{generate_password(length)}")
+        if(cutie.prompt_yes_or_no("Ajouter ce mot de passe?")):
+            name = input(f"{Fore.GREEN}Nom du mot de passe: {Style.RESET_ALL}")
+            database.add_password(client.get_id(), name, encrypt_password(generate_password(length), client.get_master_key()))
+            print(f"{Fore.GREEN}Mot de passe ajouté{Style.RESET_ALL}")
+
+    elif(choice == 6):
         break
 
 print(f"{Fore.GREEN}Au revoir{Style.RESET_ALL}")

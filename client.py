@@ -10,6 +10,7 @@ class Client:
             self.__id = self.__database.get_id(self.__username, hash_password(self.__password))
         else:
             self.__id = None
+            exit()
 
 
     def login(self) -> bool:

@@ -2,6 +2,7 @@ import base64
 import hashlib
 import os
 from Crypto.Cipher import AES
+import random
 
 def encrypt_password(password_to_encrypt: str, master_key: str) -> str:
     """Encrypt password"""
@@ -23,6 +24,10 @@ def decrypt_password(password_to_decrypt: str, master_key: str) -> str:
 def hash_password(password_to_hash: str) -> str:
     """Hash password"""
     return hashlib.sha256(password_to_hash.encode()).hexdigest()
+
+def generate_password(taille: int) -> str:
+    """Generate password"""
+    return ''.join([chr(random.randint(33, 126)) for _ in range(taille)])
 
 if __name__ == "__main__":
     hashed = hash_password("password")
